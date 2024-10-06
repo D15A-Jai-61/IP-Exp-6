@@ -1,23 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+const e = React.createElement;
 
 // Header Component with Props
-function Header({ title }) {
-    return (
-        <header>
-            <div className="logo">{title}</div>
-            <nav>
-                <ul>
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/about">About</Link></li>
-                    <li><Link to="/academics">Academics</Link></li>
-                    <li><Link to="/admissions">Admissions</Link></li>
-                    <li><Link to="/contact">Contact</Link></li>
-                </ul>
-            </nav>
-        </header>
-    );
+function Header({ title, setCurrentPage }) {
+    return e('header', null, [
+        e('div', { className: 'logo' }, title),
+        e('nav', null, 
+            e('ul', null, [
+                e('li', null, e('a', { href: '#', onClick: () => setCurrentPage('home') }, 'Home')),
+                e('li', null, e('a', { href: '#', onClick: () => setCurrentPage('about') }, 'About')),
+                e('li', null, e('a', { href: '#', onClick: () => setCurrentPage('academics') }, 'Academics')),
+                e('li', null, e('a', { href: '#', onClick: () => setCurrentPage('admissions') }, 'Admissions')),
+                e('li', null, e('a', { href: '#', onClick: () => setCurrentPage('contact') }, 'Contact'))
+            ])
+        )
+    ]);
 }
 
 // Hero Component with Props and Event
@@ -28,55 +24,47 @@ function Hero({ title, subtitle }) {
         setClicks(clicks + 1);
     };
 
-    return (
-        <section className="hero" onClick={handleClick}>
-            <h1>{title}</h1>
-            <p>{subtitle}</p>
-            <p>Clicks: {clicks}</p>
-        </section>
-    );
+    return e('section', { className: 'hero', onClick: handleClick }, [
+        e('h1', null, title),
+        e('p', null, subtitle),
+        e('p', null, `Clicks: ${clicks}`)
+    ]);
 }
 
 // Features Component with Props and Key
 function Features({ features }) {
-    return (
-        <section className="features">
-            {features.map((feature, index) => (
-                <div className="feature" key={index}>
-                    <h2>{feature.title}</h2>
-                    <p>{feature.description}</p>
-                </div>
-            ))}
-        </section>
+    return e('section', { className: 'features' },
+        features.map((feature, index) => 
+            e('div', { className: 'feature', key: index }, [
+                e('h2', null, feature.title),
+                e('p', null, feature.description)
+            ])
+        )
     );
 }
 
 // News Component
 function News() {
-    return (
-        <section className="news">
-            <h2>Latest News</h2>
-            <ul>
-                <li>VES College Ranks #1 in Engineering</li>
-                <li>New Research Center Inaugurated</li>
-                <li>Annual Tech Fest Dates Announced</li>
-            </ul>
-        </section>
-    );
+    return e('section', { className: 'news' }, [
+        e('h2', null, 'Latest News'),
+        e('ul', null, [
+            e('li', null, 'VES College Ranks #1 in Engineering'),
+            e('li', null, 'New Research Center Inaugurated'),
+            e('li', null, 'Annual Tech Fest Dates Announced')
+        ])
+    ]);
 }
 
 // Footer Component
 function Footer() {
-    return (
-        <footer>
-            <p>© 2023 VES College. All rights reserved.</p>
-            <div className="social-links">
-                <a href="#">Facebook</a>
-                <a href="#">Twitter</a>
-                <a href="#">LinkedIn</a>
-            </div>
-        </footer>
-    );
+    return e('footer', null, [
+        e('p', null, '© 2023 VES College. All rights reserved.'),
+        e('div', { className: 'social-links' }, [
+            e('a', { href: '#' }, 'Facebook'),
+            e('a', { href: '#' }, 'Twitter'),
+            e('a', { href: '#' }, 'LinkedIn')
+        ])
+    ]);
 }
 
 // Home Page Component
@@ -87,52 +75,63 @@ function Home() {
         { title: "Industry Partnerships", description: "Collaborations with leading companies" }
     ];
 
-    return (
-        <div>
-            <Hero title="Welcome to VES College" subtitle="Empowering Minds, Shaping Futures" />
-            <Features features={featuresData} />
-            <News />
-        </div>
-    );
+    return e('div', null, [
+        e(Hero, { title: "Welcome to VES College", subtitle: "Empowering Minds, Shaping Futures" }),
+        e(Features, { features: featuresData }),
+        e(News)
+    ]);
 }
 
 // About Page Component
 function About() {
-    return <h2>About VES College</h2>;
+    return e('h2', null, 'About VES College');
 }
 
 // Academics Page Component
 function Academics() {
-    return <h2>Our Academic Programs</h2>;
+    return e('h2', null, 'Our Academic Programs');
 }
 
 // Admissions Page Component
 function Admissions() {
-    return <h2>Admissions Information</h2>;
+    return e('h2', null, 'Admissions Information');
 }
 
 // Contact Page Component
 function Contact() {
-    return <h2>Contact Us</h2>;
+    return e('h2', null, 'Contact Us');
 }
 
 // Main App Component
 function App() {
-    return (
-        <Router>
-            <div>
-                <Header title="VES" />
-                <Switch>
-                    <Route exact path="/" component={Home} />
-                    <Route path="/about" component={About} />
-                    <Route path="/academics" component={Academics} />
-                    <Route path="/admissions" component={Admissions} />
-                    <Route path="/contact" component={Contact} />
-                </Switch>
-                <Footer />
-            </div>
-        </Router>
-    );
+    const [currentPage, setCurrentPage] = React.useState('home');
+
+    let pageContent;
+    switch(currentPage) {
+        case 'home':
+            pageContent = e(Home);
+            break;
+        case 'about':
+            pageContent = e(About);
+            break;
+        case 'academics':
+            pageContent = e(Academics);
+            break;
+        case 'admissions':
+            pageContent = e(Admissions);
+            break;
+        case 'contact':
+            pageContent = e(Contact);
+            break;
+        default:
+            pageContent = e(Home);
+    }
+
+    return e('div', null, [
+        e(Header, { title: "VES", setCurrentPage: setCurrentPage }),
+        pageContent,
+        e(Footer)
+    ]);
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(e(App), document.getElementById('root'));

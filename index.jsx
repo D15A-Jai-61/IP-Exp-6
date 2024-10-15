@@ -103,10 +103,8 @@ function Academics() {
         e('p', null, 'VES College offers a wide range of undergraduate and postgraduate programs across various disciplines:'),
         e('ul', null, [
             e('li', null, 'Bachelor of Science (B.Sc.) in Computer Science, Physics, Chemistry, and Mathematics'),
-            e('li', null, 'Bachelor of Commerce (B.Com.)'),
             e('li', null, 'Bachelor of Arts (B.A.) in Economics, Psychology, and Sociology'),
             e('li', null, 'Master of Science (M.Sc.) in Information Technology'),
-            e('li', null, 'Master of Commerce (M.Com.)')
         ]),
         e('p', null, 'Our programs are designed to provide a strong foundation in theory and practical skills, preparing students for successful careers in their chosen fields.')
     ]);

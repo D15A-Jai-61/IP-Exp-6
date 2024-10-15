@@ -202,8 +202,8 @@ function Contact() {
         e('p', null, 'Sindhi Society, Chembur'),
         e('p', null, 'Mumbai - 400071, Maharashtra, India'),
         e('h3', null, 'Office Hours'),
-        e('p', null, 'Monday to Friday: 9:00 AM - 5:00 PM'),
-        e('p', null, 'Saturday: 9:00 AM - 1:00 PM (Closed on Sundays and public holidays)')
+        e('p', null, 'Monday to Friday: 8:30 AM - 3:30 PM'),
+        e('p', null, '(Closed on Sundays and public holidays)')
     ]);
 }
 

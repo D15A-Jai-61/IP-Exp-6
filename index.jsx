@@ -89,7 +89,7 @@ function Home() {
 function About() {
     return e('div', { className: 'page-content' }, [
         e('h2', null, 'About VES College'),
-        e('p', null, 'VES College of Arts, Science and Commerce, established in 1962, is a premier institution dedicated to providing quality education in various disciplines.'),
+        e('p', null, 'VES College of Science and Humanities, established in 1962, is a premier institution dedicated to providing quality education in various disciplines.'),
         e('p', null, 'Our mission is to empower students with knowledge, skills, and values that enable them to excel in their chosen fields and contribute positively to society.'),
         e('h3', null, 'Our Vision'),
         e('p', null, 'To be a leading institution of higher education, recognized for academic excellence, innovative research, and commitment to social responsibility.')
